@@ -3,18 +3,13 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- Name: addresses; Type: TABLE; Schema: public; Owner: postgres;
+-- Name: supplieraddresses; Type: TABLE; Schema: public; Owner: postgres;
 --
-CREATE TABLE public.addresses (
+CREATE TABLE public.supplier_addresses (
     id SERIAL PRIMARY KEY,
-    building CHARACTER VARYING(255),
-    unit_floor CHARACTER VARYING(255),
-    street_number CHARACTER VARYING(255),
-    street_name CHARACTER VARYING(255),
-    city CHARACTER VARYING(255),
-    zip_or_postcode CHARACTER VARYING(255),
-    state_or_territory CHARACTER VARYING(255),
-    country CHARACTER VARYING(255),
+    supplier_id INTEGER NOT NULL,
+    address_id INTEGER NOT NULL,
+    UNIQUE (supplier_id, address_id)
 );
 
 ALTER TABLE public.suppliers OWNER TO postgres;
