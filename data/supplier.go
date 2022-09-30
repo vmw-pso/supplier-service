@@ -3,10 +3,7 @@ package data
 import (
 	"context"
 	"database/sql"
-	"time"
 )
-
-const dbTimeout = 3 * time.Second // move to config
 
 type Supplier struct {
 	ID   int    `json:"id"`
@@ -61,8 +58,6 @@ func (s *Supplier) GetById(db *sql.DB, id int) (*Supplier, error) {
 
 	return &supplier, nil
 }
-
-var id int
 
 func (s *Supplier) Insert(supplier Supplier, db *sql.DB) (int, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), dbTimeout)
