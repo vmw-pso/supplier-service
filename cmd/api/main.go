@@ -11,7 +11,7 @@ import (
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/cors"
-	"github.com/vmw-pso/authentication-service/data"
+	"github.com/vmw-pso/supplier-service/data"
 	"github.com/vmw-pso/toolkit"
 
 	_ "github.com/jackc/pgconn"
@@ -43,7 +43,7 @@ func run(args []string) error {
 
 type server struct {
 	DB     *sql.DB
-	Models data.Models
+	Models *data.Models
 	mux    *chi.Mux
 	tools  toolkit.Tools
 }
@@ -69,7 +69,7 @@ func newServer() *server {
 	srv := &server{
 		DB:     db,
 		mux:    mux,
-		models: models,
+		Models: models,
 		tools:  tools,
 	}
 	srv.routes()
