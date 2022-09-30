@@ -7,7 +7,6 @@ require (
 	github.com/go-chi/cors v1.2.1
 	github.com/jackc/pgconn v1.13.0
 	github.com/jackc/pgx/v4 v4.17.2
-	github.com/vmw-pso/authentication-service v0.0.0-20220921080107-fba4c072d70e
 	github.com/vmw-pso/toolkit v0.0.0-20220918110345-b07447df119c
 )
 

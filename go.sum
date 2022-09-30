@@ -109,8 +109,6 @@ github.com/stretchr/testify v1.7.0/go.mod h1:6Fq8oRcR53rry900zMqJjRRixrwX3KX962/
 github.com/stretchr/testify v1.7.1/go.mod h1:6Fq8oRcR53rry900zMqJjRRixrwX3KX962/h/Wwjteg=
 github.com/stretchr/testify v1.8.0 h1:pSgiaMZlXftHpm5L7V1+rVB+AZJydKsMxsQBIJw4PKk=
 github.com/stretchr/testify v1.8.0/go.mod h1:yNjHg4UonilssWZ8iaSj1OCr/vHnekPRkoO+kdMU+MU=
-github.com/vmw-pso/authentication-service v0.0.0-20220921080107-fba4c072d70e h1:9R7H807sh9msDLUqnoQ5zqIX/Qx7n3uxKG9BU4ABYDY=
-github.com/vmw-pso/authentication-service v0.0.0-20220921080107-fba4c072d70e/go.mod h1:4BCTcT6sZPHt9z9AfkJfq/OFgluy1WuEGyd4YwAHEsE=
 github.com/vmw-pso/toolkit v0.0.0-20220918110345-b07447df119c h1:vC7dxfmIo8EBAKi/VuEgPxoeuxa7OvXzc+x+/ivEpB0=
 github.com/vmw-pso/toolkit v0.0.0-20220918110345-b07447df119c/go.mod h1:9/rLEjZfIIovKNARVz7AQrx72WnZ15mR10VHgKpTcYY=
 github.com/zenazn/goji v0.9.0/go.mod h1:7S9M489iMyHBNxwZnk9/EHS098H4/F6TATF2mIxtB1Q=
