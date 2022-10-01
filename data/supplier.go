@@ -10,7 +10,12 @@ type Supplier struct {
 	Name string `json:"name:"`
 }
 
-func (s *Supplier) GetAll(db *sql.DB) ([]*Supplier, error) {
+type SupplierWithAddress struct {
+	Supplier Supplier `json:"supplier"`
+	Address  Address  `json:"address"`
+}
+
+func (s *Supplier) GetNames(db *sql.DB) ([]*Supplier, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), dbTimeout)
 	defer cancel()
 
@@ -37,6 +42,48 @@ func (s *Supplier) GetAll(db *sql.DB) ([]*Supplier, error) {
 	}
 
 	return suppliers, nil
+}
+
+func (s *Supplier) GetAll(db *sql.DB) ([]SupplierWithAddress, error) {
+	ctx, cancel := context.WithTimeout(context.Background(), dbTimeout)
+	defer cancel()
+
+	query := `SELECT suppliers.id, suppliers.name, address.id, address.building, 
+	          address.unit_floor, address.street_number, address.street_name, 
+			  address.city, address.zip_or_postcode, address.state_or_teritory, address.country 
+			  from suppliers
+			  JOIN supplieraddresses ON (supplieraddresses.supplier_id = suppliers.id)
+			  JOIN addresses ON (address.id = supplieraddresses.address_id`
+
+	rows, err := db.QueryContext(ctx, query)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var sa []SupplierWithAddress
+
+	for rows.Next() {
+		var s SupplierWithAddress
+		err := rows.Scan(
+			&s.Supplier.ID,
+			&s.Supplier.Name,
+			&s.Address.ID,
+			&s.Address.Building,
+			&s.Address.UnitFloor,
+			&s.Address.StreetNumber,
+			&s.Address.StreetName,
+			&s.Address.City,
+			&s.Address.ZipOrPostcode,
+			&s.Address.StateTerritory,
+			&s.Address.Country,
+		)
+		if err != nil {
+			return nil, err
+		}
+		sa = append(sa, s)
+	}
+	return sa, nil
 }
 
 func (s *Supplier) GetById(db *sql.DB, id int) (*Supplier, error) {
