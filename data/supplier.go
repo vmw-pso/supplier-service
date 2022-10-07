@@ -6,13 +6,9 @@ import (
 )
 
 type Supplier struct {
-	ID   int    `json:"id"`
-	Name string `json:"name:"`
-}
-
-type SupplierWithAddress struct {
-	Supplier Supplier `json:"supplier"`
-	Address  Address  `json:"address"`
+	ID        int        `json:"id"`
+	Name      string     `json:"name:"`
+	Addresses []*Address `json:"addresses"`
 }
 
 func (s *Supplier) GetNames(db *sql.DB) ([]*Supplier, error) {
@@ -44,7 +40,7 @@ func (s *Supplier) GetNames(db *sql.DB) ([]*Supplier, error) {
 	return suppliers, nil
 }
 
-func (s *Supplier) GetAll(db *sql.DB) ([]SupplierWithAddress, error) {
+func (s *Supplier) GetAll(db *sql.DB) ([]Supplier, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), dbTimeout)
 	defer cancel()
 
@@ -61,13 +57,13 @@ func (s *Supplier) GetAll(db *sql.DB) ([]SupplierWithAddress, error) {
 	}
 	defer rows.Close()
 
-	var sa []SupplierWithAddress
+	var suppliers []Supplier
 
 	for rows.Next() {
-		var s SupplierWithAddress
+		var supplier Supplier
 		err := rows.Scan(
-			&s.Supplier.ID,
-			&s.Supplier.Name,
+			&s.ID,
+			&s.Name,
 			&s.Address.ID,
 			&s.Address.Building,
 			&s.Address.UnitFloor,
@@ -81,9 +77,9 @@ func (s *Supplier) GetAll(db *sql.DB) ([]SupplierWithAddress, error) {
 		if err != nil {
 			return nil, err
 		}
-		sa = append(sa, s)
+		suppliers = append(suppliers, supplier)
 	}
-	return sa, nil
+	return suppliers, nil
 }
 
 func (s *Supplier) GetById(db *sql.DB, id int) (*Supplier, error) {
