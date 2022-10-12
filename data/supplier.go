@@ -62,17 +62,17 @@ func (s *Supplier) GetAll(db *sql.DB) ([]Supplier, error) {
 	for rows.Next() {
 		var supplier Supplier
 		err := rows.Scan(
-			&s.ID,
-			&s.Name,
-			&s.Address.ID,
-			&s.Address.Building,
-			&s.Address.UnitFloor,
-			&s.Address.StreetNumber,
-			&s.Address.StreetName,
-			&s.Address.City,
-			&s.Address.ZipOrPostcode,
-			&s.Address.StateTerritory,
-			&s.Address.Country,
+			&supplier.ID,
+			&supplier.Name,
+			// &s.Address.ID,
+			// &s.Address.Building,
+			// &s.Address.UnitFloor,
+			// &s.Address.StreetNumber,
+			// &s.Address.StreetName,
+			// &s.Address.City,
+			// &s.Address.ZipOrPostcode,
+			// &s.Address.StateTerritory,
+			// &s.Address.Country,
 		)
 		if err != nil {
 			return nil, err
