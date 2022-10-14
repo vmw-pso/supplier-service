@@ -49,7 +49,7 @@ type server struct {
 }
 
 func newServer() *server {
-	mux := chi.NewMux()
+	mux := chi.NewRouter()
 
 	mux.Use(cors.Handler(cors.Options{
 		AllowedOrigins:   []string{"https://*", "http://"},
